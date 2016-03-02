@@ -4,17 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.media.FaceDetector;
-import android.widget.ImageView;
-import android.util.Log;
-import android.widget.Toast;
 import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.util.Log;
+import android.util.SparseArray;
+import android.widget.ImageView;
+
+import com.google.android.gms.vision.face.Face;
 
 public class MaskedImageView extends ImageView {
-    FaceDetector.Face[] faces = null;
+    SparseArray<Face> faces = null;
     int imageWidth;
     int imageHeight;
 
@@ -34,12 +33,12 @@ public class MaskedImageView extends ImageView {
         if (faces != null) {
             final PointF midpoint = new PointF();
 
-            for(int i = 0; i < faces.length; i++) {
-                faces[i].getMidPoint(midpoint);
-
-                final float x = scaleX * midpoint.x + transX;
-                final float y = scaleY * midpoint.y + transY;
-                final float faceSize = scaleX * faces[i].eyesDistance();
+            for(int i = 0; i < faces.size(); i++) {
+                float midpointX = 0.5f*(faces.valueAt(i).getLandmarks().get(0).getPosition().x + faces.valueAt(i).getLandmarks().get(1).getPosition().x); /*[i].getMidPoint(midpoint)*/;
+                float midpointY = 0.5f*(faces.valueAt(i).getLandmarks().get(1).getPosition().y + faces.valueAt(i).getLandmarks().get(1).getPosition().y);
+                final float x = scaleX * midpointX + transX;
+                final float y = scaleY * midpointY + transY;
+                final float faceSize = scaleX * (faces.valueAt(i).getLandmarks().get(1).getPosition().x - faces.valueAt(i).getLandmarks().get(0).getPosition().x); /*[i].eyesDistance()*/;
 
                 drawMask(x, y, faceSize, canvas);
             }
@@ -60,13 +59,13 @@ public class MaskedImageView extends ImageView {
         canvas.drawBitmap(resizeBitmap, x - resizeBitmap.getHeight()/2, y - resizeBitmap.getWidth()/2, mPaint);
     }
 
-    public void maskFaces(FaceDetector.Face[] faces, int count, int width, int height) {
+    public void maskFaces(/*FaceDetector.Face[]*/SparseArray<Face> faces, int count, int width, int height) {
         imageWidth = width;
         imageHeight = height;
 
-        this.faces = new FaceDetector.Face[count];
+        this.faces = faces;
 
-        System.arraycopy(faces, 0, this.faces, 0, count);
+//        System.arraycopy(faces, 0, this.faces, 0, count);
     }
 
     public void noFaces() {

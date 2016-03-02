@@ -36,17 +36,25 @@
             android:id="@+id/maskView"
             android:layout_gravity="center"/>
 
-        <SurfaceView class="edu.ucsb.ece150.maskme.MaskedImageView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/maskImage"
-            android:layout_gravity="center"/>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="20pt"
-            android:text="New Text"
-            android:id="@+id/textView"
-            android:layout_gravity="center" />
+        <!--<ImageView class="edu.ucsb.ece150.maskme.MaskedImageView"-->
+            <!--android:layout_width="150pt"-->
+            <!--android:layout_height="150pt"-->
+            <!--android:id="@+id/maskImage"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:scaleType="center"/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="50pt"-->
+            <!--android:layout_height="50pt"-->
+            <!--android:id="@+id/photoImage"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:adjustViewBounds="true"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="20pt"-->
+            <!--android:text="New Text"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_gravity="center" />-->
 
     </FrameLayout>
 
