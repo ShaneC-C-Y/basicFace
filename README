@@ -1,0 +1,4 @@
+Name: Chien-Yu Chan
+Perm: 9962150
+
+This app is based on provided template, there is only one activity and two customized surfaceview. One button to do the action and one textview to tell user when there is no face in detection. 
